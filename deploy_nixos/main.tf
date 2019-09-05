@@ -55,8 +55,9 @@ variable "keys" {
 
 locals {
   triggers = {
-    deploy_nixos_drv  = "${data.external.nixos-instantiate.result["drv_path"]}"
-    deploy_nixos_keys = "${sha256(jsonencode(var.keys))}"
+    deploy_nixos_drv               = "${data.external.nixos-instantiate.result["drv_path"]}"
+    deploy_nixos_keys              = "${sha256(jsonencode(var.keys))}"
+    terraform_nixos_deploy_version = 1
   }
 
   target_system = ["--argstr", "system", "x86_64-linux"]
