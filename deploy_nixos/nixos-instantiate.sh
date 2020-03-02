@@ -9,6 +9,12 @@ shift
 shift
 shift
 
+if ! type "nix-instantiate" > /dev/null; then
+  echo 1>&2 "WARNING: nix-instantiate not found."
+  echo 1>&2 "NOTE: Attempting to install nix."
+  curl https://nixos.org/nix/install | sh
+fi
+
 # Building the command
 command=(nix-instantiate --show-trace --expr '
   { system, configuration, ... }:
