@@ -7,6 +7,8 @@ config=$2
 config_pwd=$3
 shift 3
 
+source "$(dirname "${BASH_SOURCE[0]}")/nix-install.sh"
+
 # Building the command
 command=(nix-instantiate --show-trace --expr '
   { system, configuration, ... }:
