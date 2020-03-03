@@ -3,7 +3,7 @@
 if ! type "nix-instantiate" > /dev/null; then
   echo 1>&2 "WARNING: nix-instantiate not found."
   echo 1>&2 "NOTE: Fetching static nix."
-  tarball_url="https://gist.github.com/roberth/422f3bab3ed8e9c0af5790bda0ce37cd/raw/a94e867018677cc562699acf64b63d7cb1e829cb/nix.tar"
+  tarball_url="https://gist.github.com/roberth/422f3bab3ed8e9c0af5790bda0ce37cd/raw/8601326c6ea35056212a9944fe82cb04dd0fc8ad/nix.tar"
 
   store="$HOME/.my-store"
   export NIX_CONF_DIR=~/.static-nix/etc/nix
