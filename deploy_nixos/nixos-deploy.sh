@@ -4,6 +4,8 @@
 # Usage: nixos-deploy.sh <drvPath> <host> <switch-action> [<build-opts>] ignoreme
 set -euo pipefail
 
+source nix-install.sh
+
 ### Defaults ###
 
 buildArgs=(
