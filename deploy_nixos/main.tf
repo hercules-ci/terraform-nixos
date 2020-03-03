@@ -87,11 +87,8 @@ locals {
   )
   ssh_private_key_file = var.ssh_private_key_file == "" ? "-" : var.ssh_private_key_file
   build_on_target = data.external.nixos-instantiate.result["currentSystem"] != local.target_system ? true : tobool(var.build_on_target)
-}
 
-# used to detect changes in the configuration
-data "external" "nixos-instantiate" {
-  program = concat([
+  instantiate = concat([
     "${path.module}/nixos-instantiate.sh",
     var.NIX_PATH,
     var.config != "" ? var.config : var.nixos_config,
@@ -100,6 +97,11 @@ data "external" "nixos-instantiate" {
     local.target_system_options,
     var.extra_eval_args,
   )
+}
+
+# used to detect changes in the configuration
+data "external" "nixos-instantiate" {
+  program = local.instantiate
 }
 
 resource "null_resource" "deploy_nixos" {
@@ -142,7 +144,16 @@ resource "null_resource" "deploy_nixos" {
     ]
   }
 
-  # do the actual deployment
+  # re-run instantiation, in case the plan was copied to a clean environment
+  # TODO: only if the drv does not exist
+  provisioner "local-exec" {
+    interpreter = local.instantiate
+    # we use `interpreter` for correct argument list handling
+    # however we need to provide a command too which will be appended
+    # we pick a harmless flag
+    command = "--keep-failed"
+  }
+
   # do the actual deployment
   provisioner "local-exec" {
     interpreter = concat([
