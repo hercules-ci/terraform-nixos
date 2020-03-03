@@ -4,7 +4,7 @@
 # Usage: nixos-deploy.sh <drvPath> <host> <switch-action> [<build-opts>] ignoreme
 set -euo pipefail
 
-source nix-install.sh
+source "$(dirname "${BASH_SOURCE[0]}")/nix-install.sh"
 
 ### Defaults ###
 

@@ -9,7 +9,7 @@ shift
 shift
 shift
 
-source nix-install.sh
+source "$(dirname "${BASH_SOURCE[0]}")/nix-install.sh"
 
 # Building the command
 command=(nix-instantiate --show-trace --expr '
