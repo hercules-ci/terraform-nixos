@@ -22,6 +22,7 @@ command=(nix-instantiate --show-trace --expr '
     trusted-public-keys = concatStringsSep " " os.config.nix.binaryCachePublicKeys;
     drv_path = os.system.drvPath;
     out_path = os.system;
+    inherit (builtins) currentSystem;
   }')
 
 if [[ -f "$config" ]]; then
