@@ -23,5 +23,8 @@ fi
     curl -L "$tarball_url" | tar -xC ~/.static-nix
     mkdir -p "$NIX_DATA_DIR" "$store" "$NIX_CONF_DIR" "$NIX_LOG_DIR" "$NIX_STATE_DIR"
     echo "store = $store" >"$nix_conf"
+    # Use the store to initialize it without concurrency
+    nix-store -r /nix/store/lrvcml3jjd9vydygrwnv2x603dpfxx3d-hook --add-root ~/bogus --indirect >/dev/null
+    rm ~/bogus
   fi
 )
