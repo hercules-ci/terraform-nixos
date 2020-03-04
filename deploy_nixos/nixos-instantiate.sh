@@ -5,9 +5,7 @@ set -euo pipefail
 nix_path=$1
 config=$2
 config_pwd=$3
-shift
-shift
-shift
+shift 3
 
 source "$(dirname "${BASH_SOURCE[0]}")/nix-install.sh"
 
