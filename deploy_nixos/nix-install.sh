@@ -28,3 +28,6 @@ fi
     rm ~/bogus
   fi
 )
+
+echo 1>&2 "Nix version:"
+nix-instantiate --version
