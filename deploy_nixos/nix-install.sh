@@ -30,4 +30,4 @@ fi
 )
 
 echo 1>&2 "Nix version:"
-nix-instantiate --version
+nix-instantiate --version 1>&2
